@@ -24,17 +24,21 @@ public class Question {
 	@JoinColumn(name = "question_id")
 	private List<Answer> answers;
 	
+	public Question() {}
+	
 	public long getId() {
 		return id;
 	}
 	
-	public Question() {}
+	public String getQuestion() {
+		return question;
+	}
 	
-	public Question(String question) {
+	public void setQuestion(String question) {
 		this.question = question;
 	}
 	
-	public String getQuestion() {
-		return question;
+	public void setPuzzle(Puzzle puzzle) {
+		this.puzzle = puzzle;
 	}
 }

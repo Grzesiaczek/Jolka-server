@@ -46,11 +46,6 @@ public class JolkaApplicationTests {
 	@Test
 	public void test() {
 		Puzzle puzzle = new Puzzle();
-		Question q1 = new Question("jestem");
-		Question q2 = new Question("tak");
-		
-		puzzle.addQuestion(q1);
-		puzzle.addQuestion(q2);
 		
 		puzzleRepository.save(puzzle);
 		assertEquals(questionRepository.count(), 2);

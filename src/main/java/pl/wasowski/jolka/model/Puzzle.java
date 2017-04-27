@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
+
+import pl.wasowski.jolka.Views;
 
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -31,12 +34,19 @@ public class Puzzle {
 	@JoinColumn(name = "puzzle_id")
 	private List<Question> questions = new ArrayList<Question>();
 	
+	@JsonView(Views.List.class)
 	public long getId() {
 		return id;
 	}
 	
+	@JsonView(Views.List.class)
 	public int getNumber() {
 		return number;
+	}
+	
+	@JsonView(Views.List.class)
+	public int getQuestionNumber() {
+		return questions.size();
 	}
 	
 	public void setNumber(int number) {
@@ -49,5 +59,9 @@ public class Puzzle {
 	
 	public void addQuestion(Question question) {
 		questions.add(question);
+	}
+	
+	public void prepareQuestions() {
+		questions.forEach(q -> q.setPuzzle(this));
 	}
 }
